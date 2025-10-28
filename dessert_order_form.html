@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dessert Order Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #f5f2ed 0%, #e8e3db 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fffef9;
+            padding: 50px;
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #d4cfc4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3d3d3d;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            letter-spacing: 3px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .customer-info {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="datetime-local"],
+        input[type="number"],
+        textarea {
+            padding: 12px;
+            border: 1px solid #d4cfc4;
+            border-radius: 1px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            background: #fffef9;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8b7355;
+        }
+
+        h2 {
+            color: #3d3d3d;
+            margin: 30px 0 20px 0;
+            font-size: 1.4em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d4cfc4;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .dessert-item {
+            background: #fafaf7;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 1px;
+            border-left: 3px solid #c9a581;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e8e3db;
+        }
+
+        .dessert-item:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .dessert-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .dessert-header input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #c9a581;
+        }
+
+        .dessert-name {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #3d3d3d;
+            flex-grow: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .gf-tag {
+            background: #8b9d83;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 0.7em;
+            font-weight: 500;
+            margin-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        .df-tag {
+            background: #b89968;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 0.7em;
+            font-weight: 500;
+            margin-left: 5px;
+            letter-spacing: 1px;
+        }
+
+        .dessert-description {
+            color: #666;
+            font-style: italic;
+            margin-left: 35px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .dessert-controls {
+            display: none;
+        }
+
+        .flavor-input {
+            margin-left: 35px;
+            margin-top: 10px;
+        }
+
+        .flavor-input input {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .submit-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        button {
+            background: #8b7355;
+            color: white;
+            padding: 15px 60px;
+            border: none;
+            border-radius: 1px;
+            font-size: 1em;
+            font-weight: 400;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #6d5a42;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .additional-info {
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .customer-info {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .dessert-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        .note {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 20px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dessert Order Form</h1>
+
+        <form id="dessertForm" onsubmit="handleSubmit(event)">
+            <div class="customer-info">
+                <div class="form-group">
+                    <label for="customerName">Your Name *</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                </div>
+            </div>
+
+            <h2>Select One Dessert</h2>
+
+            <div class="dessert-item">
+                <div class="dessert-header">
+                    <input type="radio" id="dessert1" name="dessertChoice" value="Black Sesame Panna Cotta">
+                    <label for="dessert1" class="dessert-name">
+                        Black Sesame Panna Cotta
+                        <span class="gf-tag">gf</span>
+                    </label>
+                </div>
+                <div class="dessert-description">
+                    Creamy black sesame custard, kumquat compote, raspberry-yuzu gel, sesame tuile
+                </div>
+                <div class="dessert-controls">
+                    <div class="quantity-control">
+                        <label for="qty1">Quantity:</label>
+                        <input type="number" id="qty1" name="qty1" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="dessert-item">
+                <div class="dessert-header">
+                    <input type="radio" id="dessert2" name="dessertChoice" value="Hazelnut Espresso Cake">
+                    <label for="dessert2" class="dessert-name">
+                        Hazelnut Espresso Cake
+                        <span class="gf-tag">gf</span>
+                    </label>
+                </div>
+                <div class="dessert-description">
+                    Chocolate syphon cake, araguani crèmeux, hazelnut sponge cake, coffee glaze, hojicha-cacao ice cream
+                </div>
+                <div class="dessert-controls">
+                    <div class="quantity-control">
+                        <label for="qty2">Quantity:</label>
+                        <input type="number" id="qty2" name="qty2" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="dessert-item">
+                <div class="dessert-header">
+                    <input type="radio" id="dessert3" name="dessertChoice" value="Mikan">
+                    <label for="dessert3" class="dessert-name">
+                        Mikan
+                        <span class="gf-tag">gf</span>
+                    </label>
+                </div>
+                <div class="dessert-description">
+                    Mandarin tart, satsuma mandarin curd, light sudachi mousse, orange chocolate mirror glaze, gold meringue
+                </div>
+                <div class="dessert-controls">
+                    <div class="quantity-control">
+                        <label for="qty3">Quantity:</label>
+                        <input type="number" id="qty3" name="qty3" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="dessert-item">
+                <div class="dessert-header">
+                    <input type="radio" id="dessert4" name="dessertChoice" value="Japanese Rice Pudding">
+                    <label for="dessert4" class="dessert-name">
+                        Japanese Rice Pudding
+                        <span class="gf-tag">gf</span>
+                    </label>
+                </div>
+                <div class="dessert-description">
+                    Arroz con leche, olive oil yogurt cake, cinnamon rice pudding mousse
+                </div>
+                <div class="dessert-controls">
+                    <div class="quantity-control">
+                        <label for="qty4">Quantity:</label>
+                        <input type="number" id="qty4" name="qty4" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="dessert-item">
+                <div class="dessert-header">
+                    <input type="radio" id="dessert5" name="dessertChoice" value="Sorbet of the Day">
+                    <label for="dessert5" class="dessert-name">
+                        Sorbet of the Day
+                        <span class="gf-tag">gf</span>
+                        <span class="df-tag">df</span>
+                    </label>
+                </div>
+                <div class="dessert-controls">
+                    <div class="quantity-control">
+                        <label for="qty5">Quantity:</label>
+                        <input type="number" id="qty5" name="qty5" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="additional-info">
+                <h2>Comments</h2>
+
+                <div class="form-group">
+                    <textarea id="comments" name="comments" placeholder="Any additional comments or notes..."></textarea>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit">Submit Order</button>
+                <p class="note">gf = Gluten Free | df = Dairy Free</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(event.target);
+            const selectedDessert = formData.get('dessertChoice');
+            
+            // Validate that a dessert is selected
+            if (!selectedDessert) {
+                alert('Please select a dessert!');
+                return;
+            }
+            
+            const orderData = {
+                name: formData.get('customerName'),
+                dessert: selectedDessert,
+                comments: formData.get('comments')
+            };
+
+            // Display order summary
+            console.log('Order Data:', orderData);
+            
+            let summary = `Order Summary:\n\n`;
+            summary += `Name: ${orderData.name}\n`;
+            summary += `Dessert: ${orderData.dessert}\n`;
+            
+            if (orderData.comments) {
+                summary += `\nComments: ${orderData.comments}`;
+            }
+
+            alert(summary + '\n\nThank you for your order!');
+            
+            // TODO: Replace with actual form submission to your backend
+            // Example: fetch('/api/orders', { method: 'POST', body: JSON.stringify(orderData) })
+            
+            // Reset form after submission
+            // event.target.reset();
+        }
+    </script>
+</body>
+</html>
